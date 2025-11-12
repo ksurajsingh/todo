@@ -35,6 +35,7 @@
     [ ] should throw error to the user  
     [ ] do not cancel request  
     [ ] keep the name  
+[ ] have response status on apis
   
   
   

@@ -27,7 +27,7 @@ public class todoService {
     public todoResponse addTodo(todoRequest todo){
         Integer max=repo.findMaxPos();
         log.info("value of max pos obtained: {}",max);
-        int nextPos=max==null?1:max+1;
+        int nextPos=max==null?0:max+1;
         todo.setPos(nextPos);
         todo entity = tMapper.toEntity(todo);
         return tMapper.mapToResponse(repo.save(entity));
@@ -54,19 +54,26 @@ public class todoService {
                     );
         }
 
+        log.debug("shifting todo that has a previoud index of {} to -1",pIdx);
+
+        // avoid duplicates
+        repo.shiftTodo(-1,pIdx);
+
+        log.debug("shifting done");
+
         // if the todo is moved up
         if(pIdx > cIdx){
             //add 1 to pos of all elements
             //that has a pos > cidx && pos < pIdx
-            repo.shiftUp(pIdx,cIdx);
+            repo.shiftUp(cIdx,pIdx);
         }
         // if the todo is moved down
         else{
             //subtract 1 from pos of all elements
             //that has a pos < cidx && pos > pIdx
-            repo.shiftDown(pIdx,cIdx);
+            repo.shiftDown(cIdx,pIdx);
         }
-        repo.shiftTodo(pIdx,cIdx);
+        repo.shiftTodo(cIdx,-1);
 
         return String.format("Shifted pos:%d to pos:%d",pIdx,cIdx);
 

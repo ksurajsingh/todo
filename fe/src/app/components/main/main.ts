@@ -46,7 +46,6 @@ export class Main implements OnInit{
       switchMap(()=>this.todoService.getTodos()),
       tap(data => console.log("first item", data[0])))
     .subscribe(data=>{
-      console.log("2")
       this.todos=data;
       this.cdr.detectChanges();
     })

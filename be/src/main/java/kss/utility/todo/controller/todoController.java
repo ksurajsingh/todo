@@ -6,6 +6,7 @@ import kss.utility.todo.dto.todo.todoRequest;
 import kss.utility.todo.dto.todo.todoResponse;
 import kss.utility.todo.repository.todoRepo;
 import kss.utility.todo.service.todoService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/todo")
@@ -36,7 +38,8 @@ public class todoController {
     }
 
     @PatchMapping("/reorder")
-    public String reorderTodos(@RequestBody reorderRequest req){
-        return service.reorderTodos(req.getPrev_index(),req.getCur_index());
+    public ResponseEntity<Map<String,String>> reorderTodos(@RequestBody reorderRequest req){
+        String message=service.reorderTodos(req.getPrev_index(),req.getCur_index());
+        return ResponseEntity.ok(Map.of("message",message));
     }
 }

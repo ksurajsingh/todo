@@ -1,3 +1,4 @@
+logs
 .data
 .db.bak*
 be/src/main/resources/db/
