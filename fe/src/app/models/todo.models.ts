@@ -5,6 +5,7 @@ export interface todoResponse{
     status: string;
     createdAt: string;
     updatedAt: string;
+    pos:string
 }
 
 export interface todoRequest{

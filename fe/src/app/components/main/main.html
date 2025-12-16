@@ -1,8 +1,12 @@
 <div class="home-todo-layout" 
      cdkDropList
      (cdkDropListDropped)="drop($event)">
+
+     <ng-container *ngIf="loadingTodos$ | async">
+       <p> Loading . . .</p>
+     </ng-container>
     
-    <div *ngFor="let todo of todos"
+    <div *ngFor="let todo of todos$ | async"
          class="home-todo-item"
          cdkDrag>
 

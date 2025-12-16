@@ -1,9 +1,12 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CommonModule} from '@angular/common';
+import { Subject, take } from 'rxjs';
+import { DragDropModule,CdkDragDrop,moveItemInArray } from '@angular/cdk/drag-drop'
+import { Store } from '@ngrx/store';
 import { todoResponse } from '../../models/todo.models';
 import { todoService } from '../../services/todo.service';
-import { CommonModule } from '@angular/common';
-import { switchMap, Subject, takeUntil, timer, tap } from 'rxjs';
-import { DragDropModule,CdkDragDrop,moveItemInArray } from '@angular/cdk/drag-drop'
+import { loadTodos } from '../../store/todo/todo.actions';
+import { selectAllTodos,selectLoading } from '../../store/todo/todo.selectors';
 
 @Component({
   selector: 'app-main',
@@ -13,42 +16,42 @@ import { DragDropModule,CdkDragDrop,moveItemInArray } from '@angular/cdk/drag-dr
 })
 
 
-export class Main implements OnInit{
-
-  todos: todoResponse[] = [];
-  private destroy$=new Subject<void>();
+export class Main implements OnInit,OnDestroy{
+  
+  todos$;
+  loadingTodos$;
 
   constructor(
     private todoService:todoService,
-    private cdr:ChangeDetectorRef
-  ){}
+    private store:Store
+  ){
+    this.todos$ = this.store.select(selectAllTodos)
+    this.loadingTodos$ = this.store.select(selectLoading)
+  }
 
-  drop(event: CdkDragDrop<any[]>){
+  private destroy$=new Subject<void>();
+
+  drop(event: CdkDragDrop<todoResponse[]>){
     const prev_idx=event.previousIndex;
     const cur_idx=event.currentIndex;
-    moveItemInArray(
-      this.todos,
-      prev_idx,
-      cur_idx
-    )
+    
+    this.todos$.pipe(take(1)).subscribe(todos=>{
 
-    this.todoService.reorderTodos(prev_idx,cur_idx)
-    .subscribe({
-      next: (res: any)=>console.log("reordered, result: ",res),
-      error: (err: any)=>console.log("failed",err)
+      const arr = [...todos]
+      moveItemInArray( arr, prev_idx, cur_idx )
+
+      this.todoService.reorderTodos(prev_idx,cur_idx)
+      .subscribe({
+        next: (res: any)=>console.log("reordered, result: ",res),
+        error: (err: any)=>console.log("failed",err)
+      })
+
     })
+
   }
 
   ngOnInit(): void {
-    timer(0,50000)
-    .pipe(
-      takeUntil(this.destroy$),
-      switchMap(()=>this.todoService.getTodos()),
-      tap(data => console.log("first item", data[0])))
-    .subscribe(data=>{
-      this.todos=data;
-      this.cdr.detectChanges();
-    })
+    this.store.dispatch(loadTodos())
   }
 
   ngOnDestroy():void{
