@@ -19,7 +19,7 @@ public interface todoRepo extends JpaRepository<todo,Long> {
 
 
         @Modifying
-        @Query("Update todo t set t.pos=t.pos-1 where t.pos<= :cIdx AND t.pos >= :pIdx")
+        @Query(value = "Update todo t set t.pos=t.pos-1 where t.pos<= :cIdx AND t.pos >= :pIdx order by t.pos asc",nativeQuery = true)
         void shiftDown(@Param("cIdx") int cIdx,@Param("pIdx") int pIdx);
 
         @Modifying
