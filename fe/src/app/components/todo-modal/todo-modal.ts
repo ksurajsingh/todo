@@ -1,7 +1,9 @@
-import { Component, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule, FormsModule, NonNullableFormBuilder } from '@angular/forms';
+import { Component, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit, inject } from '@angular/core';
+import { FormGroup, Validators, FormControl, ReactiveFormsModule, FormsModule, NonNullableFormBuilder } from '@angular/forms';
 import { todoService } from '../../services/todo.service';
 import { todoRequest } from '../../models/todo.models';
+import { Store } from '@ngrx/store';
+import { loadTodos } from '../../store/todo/todo.actions';
 
 @Component({
   imports: [FormsModule,ReactiveFormsModule],
@@ -14,6 +16,8 @@ export class AddTodoModalComponent implements AfterViewInit {
   @Output() close = new EventEmitter<void>();
   @Output() taskAdded = new EventEmitter<{ name: string, description: string }>()
   @ViewChild('input') inputRef!: ElementRef;
+
+  private store = inject(Store)
 
 
   form: FormGroup<{ name: FormControl<string>; description: FormControl<string> }>;
@@ -43,6 +47,8 @@ export class AddTodoModalComponent implements AfterViewInit {
       .subscribe({
         next: (response) => {
           console.log("todo create: ", response)
+          // uncomment this to load todos instantly after adding
+          // this.store.dispatch(loadTodos)
           this.close.emit();
         },
         error: (err) => {
@@ -50,6 +56,7 @@ export class AddTodoModalComponent implements AfterViewInit {
         }
       })
 
+      this.store.dispatch(loadTodos())
       this.form.reset();
       this.close.emit();
     }
