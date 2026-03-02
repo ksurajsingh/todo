@@ -1,10 +1,10 @@
 # TODO   
   
 ## NEED FIX  
-[ ] only query db on demand not timely [ why is kafka used ]
+[ ] adapt css for smartphones
 
 ## Features  
-[ ] maintain order - change in the ui would also change the DB
+[x] maintain order - change in the ui would also change the DB
 [ ] CRUD on todo
 [ ] categories  
     [ ] add new category  
@@ -47,3 +47,4 @@
 [x] home page css 
     [x] sidebar
     [x] main content
+[x] only query db on demand not timely  [ manually dispatch 'loadTodos' when required ]
