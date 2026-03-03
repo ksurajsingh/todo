@@ -36,7 +36,6 @@ export class AddTodoModalComponent implements AfterViewInit {
 
   submit() {
     if (this.form.valid) {
-      this.taskAdded.emit(this.form.getRawValue());
       const raw=this.form.getRawValue();
       const reqBody:todoRequest={
         name:raw.name,
@@ -47,8 +46,8 @@ export class AddTodoModalComponent implements AfterViewInit {
       .subscribe({
         next: (response) => {
           console.log("todo create: ", response)
-          // uncomment this to load todos instantly after adding
-          // this.store.dispatch(loadTodos)
+          this.store.dispatch(loadTodos())
+          this.form.reset();
           this.close.emit();
         },
         error: (err) => {
@@ -56,9 +55,6 @@ export class AddTodoModalComponent implements AfterViewInit {
         }
       })
 
-      this.store.dispatch(loadTodos())
-      this.form.reset();
-      this.close.emit();
     }
   }
 

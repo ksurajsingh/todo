@@ -1,7 +1,7 @@
 <div class="backdrop" (click)="onBackdropClick($event)">
   <div class="modal">
 
-    <form [formGroup]="form" (ngSubmit)="submit()">
+    <form [formGroup]="form">
 
     <input
       #input
@@ -20,8 +20,19 @@
     />
 
     <div class="actions">
-      <button id="add-task-btn" (click)="submit()">Add task</button>
-      <button id="cancel-add-task-btn" (click)="close.emit()">Cancel</button>
+      <button 
+        type="button"
+        id="add-task-btn"
+        (click)="submit()">
+        Add task
+      </button>
+
+      <button
+        type="button"
+        id="cancel-add-task-btn"
+        (click)="close.emit()">
+        Cancel
+      </button>
     </div>
 
   </form>

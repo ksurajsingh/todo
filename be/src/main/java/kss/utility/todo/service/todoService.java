@@ -24,6 +24,7 @@ public class todoService {
         this.tMapper=tMapper;
     }
 
+    @Transactional
     public todoResponse addTodo(todoRequest todo){
         Integer max=repo.findMaxPos();
         log.info("value of max pos obtained: {}",max);

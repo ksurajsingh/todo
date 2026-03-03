@@ -6,6 +6,10 @@
 ## Features  
 [x] maintain order - change in the ui would also change the DB
 [ ] CRUD on todo
+    [ ] read
+    [ ] create
+    [ ] update 
+    [ ] delete
 [ ] categories  
     [ ] add new category  
 [ ] parent-child relationship  
