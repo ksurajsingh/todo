@@ -1,7 +1,6 @@
 package kss.utility.todo.repository;
 
-import jakarta.transaction.Transactional;
-import kss.utility.todo.entity.category;
+import org.springframework.transaction.annotation.Transactional;  
 import kss.utility.todo.entity.todo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -9,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface todoRepo extends JpaRepository<todo,Long> {
 
@@ -29,7 +27,17 @@ public interface todoRepo extends JpaRepository<todo,Long> {
         @Query("Select Max(pos) from todo")
         Integer findMaxPos();
 
-        @Transactional
+        @Transactional(readOnly=true)
         @Query("Select t from todo t left join fetch t.categories order by t.pos asc")
         List<todo> findAllWithCategories();
+
+        @Modifying
+        @Transactional 
+        @Query("Update todo t set t.name= :name, t.description= :description where t.id= :id")
+        void updateNameAndDescription
+        (
+         @Param("id") long id,
+         @Param("name") String name,
+         @Param("description") String description
+        );
 }

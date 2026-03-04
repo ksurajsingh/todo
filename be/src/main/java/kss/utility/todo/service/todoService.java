@@ -1,6 +1,6 @@
 package kss.utility.todo.service;
 
-import org.springframework.transaction.annotation.Transactional;  // ✅ correct
+import org.springframework.transaction.annotation.Transactional;  
 import kss.utility.todo.dto.todo.todoRequest;
 import kss.utility.todo.dto.todo.todoResponse;
 import kss.utility.todo.entity.todo;
@@ -34,7 +34,7 @@ public class todoService {
         return tMapper.mapToResponse(repo.save(entity));
     }
 
-    @Transactional
+    @Transactional(readOnly=true)
     public List<todoResponse> getAll(){
         List<todo> todos = repo.findAllWithCategories();
         return todos
@@ -79,5 +79,16 @@ public class todoService {
         return String.format("Shifted pos:%d to pos:%d",pIdx,cIdx);
 
     }
+
+    @Transactional
+    public todoResponse updateTodo(long id,todoRequest req){
+      log.info("updating todo");
+      String name=req.getName();
+      String description=req.getDescription();
+      repo.updateNameAndDescription(id,name,description);
+      todo updated=repo.findById(id).orElseThrow();
+      log.info("updated entity:{}",updated);
+      return tMapper.mapToResponse(updated);
+    } 
 
 }

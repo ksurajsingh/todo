@@ -3,13 +3,17 @@ import { todoResponse } from "../../models/todo.models";
 
 export interface TodoState {
     todos: todoResponse[],
-    loading:boolean,
+    loadingAdd:boolean,
+    loadingFetch:boolean,
+    loadingUpdate:boolean,
     error: string | null,
 }
 
 
 export const initialState: TodoState = {
     todos:[],
-    loading:false,
+    loadingAdd:false,
+    loadingFetch:false,
+    loadingUpdate:false,
     error:null
 }

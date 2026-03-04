@@ -8,9 +8,9 @@ export const selectAllTodos = createSelector(
   (state) => state.todos
 );
 
-export const selectLoading = createSelector(
+export const selectLoadingAdd = createSelector(
   selectTodoState,
-  (state) => state.loading
+  (state) => state.loadingAdd
 );
 
 export const selectError = createSelector(

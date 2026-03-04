@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -41,5 +42,10 @@ public class todoController {
     public ResponseEntity<Map<String,String>> reorderTodos(@RequestBody reorderRequest req){
         String message=service.reorderTodos(req.getPrev_index(),req.getCur_index());
         return ResponseEntity.ok(Map.of("message",message));
+    }
+
+    @PatchMapping("/update/{id}")
+    public todoResponse updateTodo(@PathVariable long id,@RequestBody todoRequest req){
+      return service.updateTodo(id, req);
     }
 }

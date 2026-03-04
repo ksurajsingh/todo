@@ -2,11 +2,11 @@ import { Observable } from "rxjs";
 import { todoRequest, todoResponse } from "../models/todo.models";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { environment } from "../../environment/env";
+import { env } from "../environment/env"
 
 @Injectable({providedIn: 'root'})
 export class todoService{
-    private baseAPI=environment.apiUrl;
+    private baseAPI=env.serverURL;
     private apiURL=this.baseAPI+"/todo";
 
     constructor(private http:HttpClient){}
@@ -22,7 +22,11 @@ export class todoService{
         })
     }
 
-    addTodo(req:todoRequest):Observable<any>{  
+    addTodo(req:todoRequest):Observable<any>{
         return this.http.post<any>(`${this.apiURL}/add`,req)
+    }
+
+    updateTodo(id:number,req:todoRequest):Observable<todoResponse>{
+        return this.http.patch<todoResponse>(`${this.apiURL}/update/${id}`,req)
     }
 }

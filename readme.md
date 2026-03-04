@@ -1,31 +1,38 @@
 # TODO   
   
 ## NEED FIX  
+[ ] updated at doesn't seem to be changing
 [ ] adapt css for smartphones
 
 ## Features  
+[ ] UX for main page 
+[ ] UI for main page
 [x] maintain order - change in the ui would also change the DB
-[ ] CRUD on todo
+[x] Complete ngRx implementation on existing flow [9:00]
+    [x] read
+    [x] create
+    [x] update
+[ ] CRUD on todo [9:00]
     [x] read
     [x] create
     [ ] update 
     [ ] delete
-[ ] categories  
+        [ ] DELETE IS ARCHIEVE
+[ ] categories  [10:00]
     [ ] add new category  
 [ ] parent-child relationship  
 [ ] render links to the title of the page
 [ ] SAVE EVERYTHING EVERY NIGHT 
-[ ] DELETE IS ARCHIEVE
 [ ] remove malicious app
-[ ] update the category of a given todo
+[ ] update the category of a given todo 
   
 ## FE  
-[ ] add fe support for description in todo modal  
-[ ] add fe support for description view in app-main  
+[x] add fe support for description in todo modal  
+[x] add fe support for description view in app-main  
   
 ## DB  
 [x] add category and junction table todo_category  
-[ ] add category column in todo table  
+[x] add category column in todo table  
   
 ## BE  
 [x] support for category   
@@ -34,7 +41,7 @@
 [x] endpoint to add category   
 [ ] endpoint to get all category  
   
-## FIX   
+## FIX [1:00]   
 [ ] avoid duplicate names of todos  
     [ ] should throw error to the user  
     [ ] do not cancel request  

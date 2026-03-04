@@ -1,10 +1,10 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { environment } from '../environment/env';
+import { env } from './environment/env';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
-  const username=environment.user;
-  const password=environment.password;
+  const username=env.user;
+  const password=env.password;
   const token=btoa(`${username}:${password}`);
 
   const authReq = req.clone({

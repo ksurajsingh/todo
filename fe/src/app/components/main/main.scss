@@ -1,20 +1,34 @@
-.home-todo-item{
-    display: grid;
-    grid-template-columns: 500px 1fr;
-    margin: 10px;
-    padding: 10px;
-    border-bottom: 2px solid silver;
-    cursor: pointer;
-}
-
 .home-todo-layout{
     height: 600px;
     background-color: grey;
     overflow: scroll;
     scrollbar-width: none;
     border-radius: 8px;
+    border: 4px solid black;
 }
 
 .home-todo-layout::-webkit-scrollbar{
     display: none;
+}
+
+.home-todo-name, .home-todo-description, .home-todo-status{
+  border: 2px solid silver;
+  margin: 10px;
+}
+
+.clickable-div-to-edit{
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr;
+  margin: 10px;
+  padding: 10px;
+  border-bottom: 2px solid silver;
+  cursor: pointer;
+}
+
+#loading{
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  margin-top: 250px;
+  font-size: 25px;
 }
