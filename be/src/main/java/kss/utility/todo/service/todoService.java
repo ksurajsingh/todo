@@ -1,6 +1,6 @@
 package kss.utility.todo.service;
 
-import kss.utility.todo.entity.todoEntity;
+import kss.utility.todo.entity.todo;
 import kss.utility.todo.repository.todoRepo;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +15,11 @@ public class todoService {
         this.repo=repo;
     }
 
-    public todoEntity addTodo(todoEntity todo){
+    public todo addTodo(todo todo){
         return repo.save(todo);
     }
 
-    public List<todoEntity> getAll(){
+    public List<todo> getAll(){
         return repo.findAll();
     }
 
