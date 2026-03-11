@@ -1,0 +1,16 @@
+<div class="home-layout">
+
+<div class="sidebar">
+    <app-sidebar></app-sidebar>
+</div>
+
+<div class="main-component">
+    <app-main></app-main>
+</div>
+
+</div>
+
+    
+  @if (showTodoModal()){
+    <app-todo-modal (close)="showTodoModal.set(false)"/>
+  }
