@@ -1,16 +1,29 @@
 <div class="backdrop" (click)="onBackdropClick($event)">
   <div class="modal">
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
     <input
       #input
       type="text"
-      [(ngModel)]="todoText"
-      placeholder="Add a task..."
+      formContrlName="name"
+      placeholder="Add a task"
       (keydown.enter)="submit()"
       (keydown.escape)="close.emit()"
     />
+    <input 
+    type="text"
+    formControlName="description"
+    placeholder="add a description"
+    (keydown.enter)="submit()"
+    (keydown.escape)="close.emit()"
+    />
+
     <div class="actions">
       <button id="add-task-btn" (click)="submit()">Add task</button>
       <button id="cancel-add-task-btn" (click)="close.emit()">Cancel</button>
     </div>
+
+  </form>
   </div>
 </div>
