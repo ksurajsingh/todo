@@ -1,9 +1,9 @@
 import { Component, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule, FormsModule, NonNullableFormBuilder } from '@angular/forms';
 
 @Component({
-  imports : [FormsModule],
+  imports: [FormsModule,ReactiveFormsModule],
   selector: 'app-todo-modal',
   templateUrl: './todo-modal.html',
   styleUrl: './todo-modal.scss'
@@ -11,32 +11,41 @@ import { FormsModule } from '@angular/forms';
 export class AddTodoModalComponent implements AfterViewInit {
 
   @Output() close = new EventEmitter<void>();
+  @Output() taskAdded = new EventEmitter<{ name: string, description: string }>()
   @ViewChild('input') inputRef!: ElementRef;
 
-  todoText = '';
 
-  constructor(private http:HttpClient) {}
+  form: FormGroup<{ name: FormControl<string>; description: FormControl<string> }>;
+
+
+  constructor(private fb: NonNullableFormBuilder, private http: HttpClient) {
+    this.form = this.fb.group({
+      name: ['', Validators.required],
+      description: ['']
+    });
+  }
 
   ngAfterViewInit() {
-    this.inputRef.nativeElement.focus();  
+    this.inputRef.nativeElement.focus();
   }
 
   submit() {
-    if (this.todoText.trim()) {
-      console.log('Add todo:', this.todoText);
+    if (this.form.valid) {
+      this.taskAdded.emit(this.form.getRawValue());
 
-      this.http.post("http://localhost:8080/todo/add",{
-        name: this.todoText,
+      this.http.post("http://localhost:8080/todo/add", {
+        todoText: this.form.controls.name,
       }).subscribe({
-        next: (response)=>{
-          console.log("todo create: ",response)
+        next: (response) => {
+          console.log("todo create: ", response)
           this.close.emit();
         },
-        error: (err)=>{
-          console.error("Failed to create todo",err)
+        error: (err) => {
+          console.error("Failed to create todo", err)
         }
       })
 
+      this.form.reset();
       this.close.emit();
     }
   }
