@@ -1,5 +1,6 @@
 package kss.utility.todo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Data
+@JsonIgnoreProperties(ignoreUnknown = false)
 @Table(name="todo")
 public class todo {
 
@@ -22,7 +24,7 @@ public class todo {
     private String description;
     private String status="todo";
 
-    @ManyToMany
+    @ManyToMany( cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name="todo_category",
             joinColumns = @JoinColumn(name = "todo_id"),

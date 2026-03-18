@@ -1,7 +1,8 @@
 package kss.utility.todo.controller;
 
 
-import kss.utility.todo.entity.todo;
+import kss.utility.todo.dto.todo.todoRequest;
+import kss.utility.todo.dto.todo.todoResponse;
 import kss.utility.todo.repository.todoRepo;
 import kss.utility.todo.service.todoService;
 import org.springframework.web.bind.annotation.*;
@@ -19,17 +20,12 @@ public class todoController {
     }
 
     @PostMapping("/add")
-    public todo addTodo(@RequestBody todo todo) {
+    public todoResponse addTodo(@RequestBody todoRequest todo) {
         return service.addTodo(todo);
     }
 
-    @GetMapping("/get")
-    public List<todo> addTodo() {
-        return service.getAll();
-    }
-
     @GetMapping("/all")
-    public List<todo> getAllTodos() {
+    public List<todoResponse> getAllTodos() {
         return service.getAll();
     }
 }

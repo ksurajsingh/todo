@@ -1,5 +1,6 @@
 package kss.utility.todo.repository;
 
+import kss.utility.todo.dto.todo.todoRequest;
 import kss.utility.todo.entity.todo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
