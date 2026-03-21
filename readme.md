@@ -1,5 +1,10 @@
 # TODO   
   
+## NEED FIX  
+[ ] todo_category is empty  
+[ ] there is no category in todo  
+[ ] category is a 200 in todo/add even tho it doesn't exist  
+
 ## Features  
 [ ] categories  
     [ ] add new category  
