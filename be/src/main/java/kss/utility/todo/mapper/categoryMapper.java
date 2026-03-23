@@ -18,7 +18,7 @@ public class categoryMapper {
         categoryResponse response = new categoryResponse();
         response.setId(cat.getId());
         response.setName(cat.getName());
-        
+
         return response;
     }
 

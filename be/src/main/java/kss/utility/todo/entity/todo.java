@@ -24,7 +24,7 @@ public class todo {
     private String description;
     private String status="todo";
 
-    @ManyToMany( cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
     @JoinTable(
             name="todo_category",
             joinColumns = @JoinColumn(name = "todo_id"),
