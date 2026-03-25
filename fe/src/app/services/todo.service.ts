@@ -12,4 +12,11 @@ export class todoService{
     getTodos():Observable<todo[]>{
         return this.http.get<todo[]>(`${this.apiURL}/all`);
     }
+
+    reorderTodos(prevIndex:number, curIndex:number):Observable<any>{
+        return this.http.patch<any>(`${this.apiURL}/reorder`,{
+            prev_index:prevIndex,
+            cur_index:curIndex
+        })
+    }
 }

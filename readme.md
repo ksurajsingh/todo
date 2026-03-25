@@ -1,15 +1,18 @@
 # TODO   
   
 ## NEED FIX  
+[ ] only query db on demand not timely [ why is kafka used ]
 
 ## Features  
 [ ] maintain order - change in the ui would also change the DB
+[ ] CRUD on todo
 [ ] categories  
     [ ] add new category  
 [ ] parent-child relationship  
 [ ] render links to the title of the page
 [ ] SAVE EVERYTHING EVERY NIGHT 
 [ ] DELETE IS ARCHIEVE
+[ ] remove malicious app
 [ ] update the category of a given todo
   
 ## FE  

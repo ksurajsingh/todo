@@ -1,6 +1,10 @@
-<div class="home-todo-layout">
+<div class="home-todo-layout" 
+     cdkDropList
+     (cdkDropListDropped)="drop($event)">
     
-    <div *ngFor="let todo of todos" class="home-todo-item">
+    <div *ngFor="let todo of todos"
+         class="home-todo-item"
+         cdkDrag>
 
             <div class="home-todo-name">
                 {{ todo.name }}

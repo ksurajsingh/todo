@@ -34,7 +34,7 @@ export class AddTodoModalComponent implements AfterViewInit {
       this.taskAdded.emit(this.form.getRawValue());
 
       this.http.post("http://localhost:8080/todo/add", {
-        todoText: this.form.controls.name,
+        name: this.form.controls.name.value,
       }).subscribe({
         next: (response) => {
           console.log("todo create: ", response)
