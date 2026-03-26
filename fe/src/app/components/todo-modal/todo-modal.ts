@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators, FormControl, ReactiveFormsModule, FormsModule, NonNullableFormBuilder } from '@angular/forms';
+import { todoService } from '../../services/todo.service';
+import { todoRequest } from '../../models/todo.models';
 
 @Component({
   imports: [FormsModule,ReactiveFormsModule],
@@ -18,7 +19,7 @@ export class AddTodoModalComponent implements AfterViewInit {
   form: FormGroup<{ name: FormControl<string>; description: FormControl<string> }>;
 
 
-  constructor(private fb: NonNullableFormBuilder, private http: HttpClient) {
+  constructor(private Tservice:todoService, private fb: NonNullableFormBuilder) {
     this.form = this.fb.group({
       name: ['', Validators.required],
       description: ['']
@@ -32,10 +33,14 @@ export class AddTodoModalComponent implements AfterViewInit {
   submit() {
     if (this.form.valid) {
       this.taskAdded.emit(this.form.getRawValue());
+      const raw=this.form.getRawValue();
+      const reqBody:todoRequest={
+        name:raw.name,
+        description:raw.description
+      }
 
-      this.http.post("http://localhost:8080/todo/add", {
-        name: this.form.controls.name.value,
-      }).subscribe({
+      this.Tservice.addTodo(reqBody)
+      .subscribe({
         next: (response) => {
           console.log("todo create: ", response)
           this.close.emit();

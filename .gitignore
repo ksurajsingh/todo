@@ -1,5 +1,5 @@
 .data
-.db.bak
+.db.bak*
 be/src/main/resources/db/
 application.properties
 HELP.md

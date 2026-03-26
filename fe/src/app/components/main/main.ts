@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { todo } from '../../models/todo.models';
+import { todoResponse } from '../../models/todo.models';
 import { todoService } from '../../services/todo.service';
 import { CommonModule } from '@angular/common';
 import { switchMap, Subject, takeUntil, timer, tap } from 'rxjs';
@@ -15,7 +15,7 @@ import { DragDropModule,CdkDragDrop,moveItemInArray } from '@angular/cdk/drag-dr
 
 export class Main implements OnInit{
 
-  todos: todo[] = [];
+  todos: todoResponse[] = [];
   private destroy$=new Subject<void>();
 
   constructor(
