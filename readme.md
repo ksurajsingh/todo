@@ -6,8 +6,8 @@
 ## Features  
 [x] maintain order - change in the ui would also change the DB
 [ ] CRUD on todo
-    [ ] read
-    [ ] create
+    [x] read
+    [x] create
     [ ] update 
     [ ] delete
 [ ] categories  

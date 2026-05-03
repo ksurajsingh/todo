@@ -42,7 +42,10 @@ export class Main implements OnInit,OnDestroy{
 
       this.todoService.reorderTodos(prev_idx,cur_idx)
       .subscribe({
-        next: (res: any)=>console.log("reordered, result: ",res),
+        next: (res: any)=>{
+          console.log("reordered, result: ",res),
+          this.store.dispatch(loadTodos())
+        },
         error: (err: any)=>console.log("failed",err)
       })
 
