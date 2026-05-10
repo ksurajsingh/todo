@@ -1,7 +1,6 @@
 package kss.utility.todo.entity;
 
 import jakarta.persistence.*;
-import kss.utility.todo.entity.category;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -12,7 +11,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name="todo")
-public class Todo {
+public class todo {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
