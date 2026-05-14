@@ -1,7 +1,6 @@
 # TODO   
   
 ## NEED FIX  
-[ ] category is a 200 in todo/add even tho it doesn't exist  
 
 ## Features  
 [ ] maintain order - change in the ui would also change the DB
@@ -40,3 +39,7 @@
 # FIXED  
 [x] todo_category is empty  [using 'category' instead of 'categories']  
 [x] there is no category in todo  [ Doesn't have to be]  
+[x] category is a 200 in todo/add even tho it doesn't exist  
+[x] home page css 
+    [x] sidebar
+    [x] main content

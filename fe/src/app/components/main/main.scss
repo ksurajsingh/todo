@@ -5,3 +5,15 @@
     padding: 10px;
     border-bottom: 2px solid silver;
 }
+
+.home-todo-layout{
+    height: 600px;
+    background-color: grey;
+    overflow: scroll;
+    scrollbar-width: none;
+    border-radius: 8px;
+}
+
+.home-todo-layout::-webkit-scrollbar{
+    display: none;
+}
