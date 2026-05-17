@@ -15,4 +15,5 @@ public class todoResponse {
     private String categories;
     private LocalDateTime updatedAt;
     private LocalDateTime createdAt;
+    private int pos;
 }

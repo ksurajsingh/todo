@@ -30,6 +30,7 @@ public class todoMapper {
         response.setName(todo.getName());
         response.setDescription(todo.getDescription());
         response.setStatus(todo.getStatus());
+        response.setPos(todo.getPos());
 
         if (todo.getCategories() != null) {
             String categoryNames = todo.getCategories()
@@ -48,6 +49,7 @@ public class todoMapper {
         entity.setName(todo.getName());
         entity.setDescription(todo.getDescription());
         entity.setStatus(todo.getStatus());
+        entity.setPos(todo.getPos());
 
 
         if (todo.getCategories() != null) {
@@ -55,6 +57,7 @@ public class todoMapper {
             List<category> categories = cRepo.findByNameIn(categoryNames);
 
             // check if all specified category exists
+
             if (categories.size() != categoryNames.size()) {
                 List<String> unknownCategories = new ArrayList<String>();
 
@@ -70,6 +73,15 @@ public class todoMapper {
         } else {
             log.info("Couldn't find any categories sent by the user, Categories: NULL");
             log.warn("NO CATEGORIES CAPTURED!");
+            log.warn("Trying to find default cateogry");
+
+            category defName = cRepo.findByName("TODO")
+                .orElseThrow(()->
+                    new RuntimeException(("Default category: TODO not found\n " +
+                    "run Flyway migration sciprt")));
+
+            log.warn("Setting categories as default category: TODO");
+            entity.setCategories(List.of(defName));
         }
 
         return entity;

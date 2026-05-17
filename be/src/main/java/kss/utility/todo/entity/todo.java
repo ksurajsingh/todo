@@ -31,6 +31,7 @@ public class todo {
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private List<category> categories;
+    private int pos;
 
 
     @CreationTimestamp

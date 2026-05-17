@@ -15,4 +15,10 @@ public class GlobalExceptionHandler {
     public Map<String,String> handleCategoryNotFoundException(CategoryNotFoundException ex){
         return Map.of("error: ",ex.getMessage());
     }
+
+    @ExceptionHandler(CouldNotHappenException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleCouldNotHandleException(CouldNotHappenException ex){
+        return "error: "+ex.getMessage();
+    }
 }

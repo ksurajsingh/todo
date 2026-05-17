@@ -9,4 +9,5 @@ public class todoRequest{
     private String description;
     private String status;
     private String categories;
+    private int pos;
 }
