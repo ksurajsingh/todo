@@ -9,17 +9,17 @@
 [ ] UI for main page  
 [x] maintain order - change in the ui would also change the DB  
 [x] Complete ngRx implementation on existing flow [9:00]  
-    [x] read  
-    [x] create  
-    [x] update  
+> [x] read  
+> [x] create  
+> [x] update  
 [ ] CRUD on todo [9:00]  
-    [x] read  
-    [x] create  
-    [x] update  
-    [ ] delete  
-        [ ] DELETE IS ARCHIEVE  
+> [x] read  
+> [x] create  
+> [x] update  
+> [ ] delete  
+> [ ] DELETE IS ARCHIEVE  
 [ ] categories  [10:00]  
-    [ ] add new category  
+> [ ] add new category  
 [ ] parent-child relationship  
 [ ] render links to the title of the page  
 [ ] SAVE EVERYTHING EVERY NIGHT  
@@ -36,16 +36,16 @@
   
 ## BE  
 [x] support for category  
-    [x] mapper  
-    [x] dto  
+> [x] mapper  
+> [x] dto  
 [x] endpoint to add category  
 [ ] endpoint to get all category  
   
 ## FIX [1:00]  
 [ ] avoid duplicate names of todos  
-    [ ] should throw error to the user  
-    [ ] do not cancel request  
-    [ ] keep the name  
+> [ ] should throw error to the user  
+> [ ] do not cancel request  
+> [ ] keep the name  
 [ ] have response status on apis  
   
   
@@ -56,6 +56,6 @@
 [x] there is no category in todo  [ Doesn't have to be]  
 [x] category is a 200 in todo/add even tho it doesn't exist  
 [x] home page css  
-    [x] sidebar  
-    [x] main content  
+> [x] sidebar  
+> [x] main content  
 [x] only query db on demand not timely  [ manually dispatch 'loadTodos' when required ]  
